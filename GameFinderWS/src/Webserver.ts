@@ -46,7 +46,7 @@ export async function startServer() {
   //Need to be able to change characterSheet & spell information incase of typos
   //Need to be able to change profile information
 
-  server.listen(90);
+  server.listen(3000);
 
   
 }
