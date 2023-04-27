@@ -10,6 +10,7 @@
 //import * as DB from "./mongoDB";
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
+import {Spell} from "./Spell";
 //const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reaso
 
 export class Profile {
@@ -19,6 +20,7 @@ export class Profile {
     private username;
     private password;
     private permissionLvl;
+    //private privacyLvl;
     private blockedProfiles = new Array();
     private friends = new Array();
     private charSheets : Array<CharSheet> = null as any;
@@ -34,7 +36,7 @@ export class Profile {
             this.username = arr[1];
             this.password = arr[2];
             this.db = arr[3];
-            this.permissionLvl = 0;
+            this.permissionLvl = "0";
             this.saveToDB();
         }
         else{
@@ -64,8 +66,6 @@ export class Profile {
         const doc = await collection.findOne( {Username : this.username} );
 
         this.displayName = doc.DisplayName;
-        //console.log( this.displayName );
-        //console.log( doc.DisplayName );
         this.permissionLvl = doc.PermissionLevel;
         this.charSheets = JSON.parse( doc.CharacterSheets );
         this.blockedProfiles = doc.BlockedProfiles;
@@ -74,14 +74,30 @@ export class Profile {
 
 
 
+    public editInformation(displayName : string, password : string, permissionLvl : string, blockedProfiles : Array<string>, friends : Array<string>) {
+        this.displayName = displayName;
+        this.password = password;
+        this.permissionLvl = permissionLvl;
+        this.blockedProfiles = blockedProfiles;
+        this.friends = friends;
+
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.permissionLvl);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
+    }
+
 
 
     //For profiles would I have it be something like calling the profile, then looking at the different character sheets
     //and going from that or should I just call the character sheets and have spells modified from that ?
-    public createCharSheet(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string,
-    stats : Array<string>, equipment : Array<string>, inventory : Array<string>, languages : Array<string>, skills : Array<string>){
+    public createCharSheet(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    pictures : Array<string>){
 
-        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, null as any, stats, equipment, inventory, languages, skills);
+        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money, spells,
+        skills, pictures);
         this.addCharacterSheet(newSheet);
     }
 
@@ -89,8 +105,24 @@ export class Profile {
         this.charSheets.push(newSheet);
     }
 
-    public setMongoDB(){
-        this.db = null as any; 
+    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    pictures : Array<string>){
+        charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money, spells,
+            skills, pictures);
+    }
+
+    public accessCharacterSheet(charName : string) {
+
+        for(var i = 0; i < this.charSheets.length; i++){
+            if( charName = this.charSheets[i].charName ) {
+                return this.charSheets[i];
+            }
+        }
+    }
+
+    public setMongoDB(mongo : MongoDB) {
+        this.db = mongo;
     }
 
     public returnDisplayName() {

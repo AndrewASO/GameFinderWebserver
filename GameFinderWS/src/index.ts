@@ -63,14 +63,14 @@ function test() {
 //const testingJSON = JSON.stringify(Webserver);
 //console.log( testingJSON );
 
-let newSpell = new Spell( "Fireball", "5s", "500m", "5s", "This shoots a fireball at any enemies", "1", null as any, null as any, 
-null as any, null as any, null as any);
-let newSpell2 = new Spell( "Fireball", "5s", "500m", "5s", "This shoots a fireball at any enemies", "1", ["Fire"], null as any, 
-null as any, null as any, null as any);
+//let newSpell = new Spell( "Fireball", "5s", "500m", "5s", "This shoots a fireball at any enemies", "1", null as any, null as any, 
+//null as any, null as any, null as any);
+//let newSpell2 = new Spell( "Fireball", "5s", "500m", "5s", "This shoots a fireball at any enemies", "1", ["Fire"], null as any, 
+//null as any, null as any, null as any);
 //console.log( JSON.stringify(newSpell) );
 const spellArray = new Array();
-spellArray.push(newSpell);
-spellArray.push(newSpell2);
+//spellArray.push(newSpell);
+//spellArray.push(newSpell2);
 //database.updateDB( "ProfilesDB", "Profiles", "TestingOne", "Spells", JSON.stringify(spellArray) );
 
 //let newCharSheet = new CharSheet( "Bob", "Human", "Was a builder in a previous life", "Idk something something something", "50", 

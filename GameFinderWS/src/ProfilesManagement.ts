@@ -92,8 +92,9 @@ export class ProfileManagement {
         for(var i = 0; i < this.profileList.length; i++) {
             if(username == this.profileList[i].returnUsername() ) {
                 let copyProfile = this.profileList[i];
-                copyProfile.setMongoDB();
-                return JSON.stringify(copyProfile);
+                //copyProfile.setMongoDB();
+                //return JSON.stringify(copyProfile);
+                return copyProfile;
             }
         }
     }

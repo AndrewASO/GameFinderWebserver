@@ -9,13 +9,13 @@
 
 /**
  * TO-ADD
- * Enemies[]
- * NPCs[]
+ * NPCs[]   : Name, Race, Size, Speed, Stats modifications, attacks, desc   by friendly / enemy
  * AddNPC()
- * AddEnemy()
- * RM Enemy / NPC
- * Wtf stats do NPCs / Enemies even need to have ???
+ * RM  NPC
+ * Maybe have the option of map later, they can just import an img into it (OPT)
  */
+
+
 
 export class DMScreen {
 

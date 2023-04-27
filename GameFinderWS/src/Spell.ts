@@ -17,7 +17,7 @@ export class Spell {
 
     public school : Array<string>;
     public components : Array<string>;
-    public materialCost : Array<string>;
+    //public materialCost : Array<string>;
     public races : Array<string>;
     public reqClasses : Array<string>;
 
@@ -37,7 +37,7 @@ export class Spell {
      * @param reqClasses 
      */
     constructor(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string, school : Array<string>,
-    components : Array<string>, materialCost : Array<string>, races : Array<string>, reqClasses : Array<string> ) {
+    components : Array<string>, races : Array<string>, reqClasses : Array<string> ) {
         this.spellName = spellName;
         this.castingTime = castingTime;
         this.range = range;
@@ -46,7 +46,6 @@ export class Spell {
         this.spellLvl = spellLvl;
         this.school = school;
         this.components = components;
-        this.materialCost = materialCost;
         this.races = races;
         this.reqClasses = reqClasses;
     }
@@ -55,7 +54,7 @@ export class Spell {
      * Gets all of the information that the frontend can send to here and it'll modify the current spell class information
      */
     editInformation(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string, school : Array<string>,
-    components : Array<string>, materialCost : Array<string>, races : Array<string>, reqClasses : Array<string>) {
+    components : Array<string>, races : Array<string>, reqClasses : Array<string>) {
 
         this.spellName = spellName;
         this.castingTime = castingTime;
@@ -65,7 +64,6 @@ export class Spell {
         this.spellLvl = spellLvl;
         this.school = school;
         this.components = components;
-        this.materialCost = materialCost;
         this.races = races;
         this.reqClasses = reqClasses;
     }
@@ -88,7 +86,7 @@ export class Spell {
         returnArray.push(this.spellLvl);
         returnArray.push(this.school);
         returnArray.push(this.components);
-        returnArray.push(this.materialCost);
+        //returnArray.push(this.materialCost);
         returnArray.push(this.races);
         returnArray.push(this.reqClasses);
 

@@ -9,21 +9,26 @@ import {Spell} from "./Spell";
 
 export class CharSheet {
 
-    private charName;
+    public charName;
     private race;
     private background;
     private backstory;
     private lvl;
     private charClass;
-    //private stats = new Map<string, string>();   //Wait why is this a map/hash again ? I could've just returned an array and we have the naming
-    //scheme of it being something like [int, def, atk, etc]
+    private equipment;  
+    private stats = [1, 1, 1, 1, 1, 1];     //[str, dexterity, constitution, intelligence, wisdom, charisma]
+    private statModifier = [0, 0, 0, 0, 0, 0]
+    //Proficiency bonus
+    private combatStats = [1, 1, 1, 1, 1, 1];   //[Armour class, initiative, speed, current hit pts, total hit pts, charisma ]
+    private money = [0, 0, 0];  //[Gold, Silver, Electrum]
     private spells : Array<Spell>;
-    private stats : Array<string>;
-    private equipment : Array<string>;
-    private inventory : Array<string>;
-    private languages : Array<string>;
     private skills : Array<string>;
-    //Need to add a photos[3]
+    private pictures : Array<string>;   //This just stores a 64string picture
+
+    //Each skill has a proficiency bonus in a certain stat
+
+    //Add recommended racial feature depending on races
+    //Add recommended skills depending on class
 
     /**
      * 
@@ -36,24 +41,26 @@ export class CharSheet {
      * @param spells 
      * @param stats 
      * @param equipment 
-     * @param inventory 
-     * @param languages 
      * @param skills 
      */
-    constructor(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, spells : Array<Spell>,
-    stats : Array<string>, equipment : Array<string>, inventory : Array<string>, languages : Array<string>, skills : Array<string>) {
+    constructor(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    pictures : Array<string>) {
         this.charName = charName;
         this.race = race;
         this.background = background;
         this.backstory = backstory;
         this.lvl = lvl;
         this.charClass = charClass;
-        this.spells = spells;
-        this.stats = stats;
         this.equipment = equipment;
-        this.inventory = inventory;
-        this.languages = languages;
-        this.skills = skills;
+        this.stats = stats;
+        this.statModifier = statMods;
+        this.combatStats = combatStats;
+        this.money = money;
+        this.spells = spells;
+        this.skills = skills; 
+        this.pictures = pictures;
+
     }
 
 
@@ -72,20 +79,23 @@ export class CharSheet {
      * @param languages 
      * @param skills 
      */
-    public editInformation(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, spells : Array<Spell>,
-    stats : Array<string>, equipment : Array<string>, inventory : Array<string>, languages : Array<string>, skills : Array<string>) {
-            this.charName = charName;
-            this.race = race;
-            this.background = background;
-            this.backstory = backstory;
-            this.lvl = lvl;
-            this.charClass = charClass;
-            this.spells = spells;   //This'll prob be null to begin with 
-            this.stats = stats;
-            this.equipment = equipment;
-            this.inventory = inventory;
-            this.languages = languages;
-            this.skills = skills;
+    public editInformation(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
+    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, spells : Array<Spell>, skills : Array<string>,
+    pictures : Array<string>) {
+        this.charName = charName;
+        this.race = race;
+        this.background = background;
+        this.backstory = backstory;
+        this.lvl = lvl;
+        this.charClass = charClass;
+        this.equipment = equipment;
+        this.stats = stats;
+        this.statModifier = statMods;
+        this.combatStats = combatStats;
+        this.money = money;
+        this.spells = spells;
+        this.skills = skills; 
+        this.pictures = pictures;
     }
 
     /**
@@ -105,7 +115,7 @@ export class CharSheet {
      */
     public createSpell(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
     school : Array<string>, components : Array<string>, materialCost : Array<string>, races : Array<string>, reqClasses : Array<string>) {
-        let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, materialCost, races, reqClasses);
+        let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
         this.addSpell( newSpell );
     }
 
@@ -131,8 +141,8 @@ export class CharSheet {
         returnArray.push(this.stats);
         returnArray.push(this.spells);
         returnArray.push(this.equipment);
-        returnArray.push(this.inventory);
-        returnArray.push(this.languages);
+        //returnArray.push(this.inventory);
+        //returnArray.push(this.languages);
         returnArray.push(this.skills);
 
         return returnArray;
