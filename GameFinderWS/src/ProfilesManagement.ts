@@ -87,13 +87,19 @@ export class ProfileManagement {
         this.profileList.push(profile)
     }
 
-    async accessUser(username : string) {
+    public async accessUser(username : string) {
 
         for(var i = 0; i < this.profileList.length; i++) {
+
+            //console.log( "This is the username being looked at " + username);
+            //console.log( "This is the uesrname of profileList[i] " + this.profileList[i].returnUsername() );
+
             if(username == this.profileList[i].returnUsername() ) {
+                //console.log( "access user is getting to this point")
                 let copyProfile = this.profileList[i];
                 //copyProfile.setMongoDB();
                 //return JSON.stringify(copyProfile);
+                //console.log( copyProfile );
                 return copyProfile;
             }
         }

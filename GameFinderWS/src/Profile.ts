@@ -61,7 +61,7 @@ export class Profile {
     /**
      * 
      */
-    async getUserDBInfo() {
+    public async getUserDBInfo() {
         let collection = this.db.returnCollection("ProfilesDB", "Profiles");
         const doc = await collection.findOne( {Username : this.username} );
 
@@ -112,12 +112,20 @@ export class Profile {
             skills, pictures);
     }
 
-    public accessCharacterSheet(charName : string) {
+    public accessCharacterSheet(pos : number) {
 
+        /** 
         for(var i = 0; i < this.charSheets.length; i++){
             if( charName = this.charSheets[i].charName ) {
                 return this.charSheets[i];
             }
+        }*/
+
+        if(this.charSheets[pos] != null) {
+            return this.charSheets[pos];
+        }
+        else{
+            return "The character sheet at this position is null";
         }
     }
 
