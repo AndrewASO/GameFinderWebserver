@@ -26,8 +26,8 @@ export async function startServer() {
     const username = req.query.Username as string;
     const pw = req.query.Password as string;
     const email = req.query.Email as string;
-    const privacyLvl = Number.parseInt( req.query.PrivacyLevel as string);
-    const msg = await profileManagement.signIn( displayName, email, privacyLvl, username, pw);
+    const privacyLvl = req.query.PrivacyLevel as string;
+    const msg = await profileManagement.signIn( displayName, email, username, pw);
     res.send(msg);
   } )
 
@@ -49,10 +49,10 @@ export async function startServer() {
     const updateProfile = await profileManagement.accessUser(username);
     const displayName = req.query.DisplayName as string;
     const pw = req.query.Password as string;
-    const permissionLevel = req.query.PermissionLevel as string;
+    const privacyLvl = req.query.PrivacyLevel as string;
     const blockedProfiles = req.query.BlockedProfiles as Array<string>;
     const friends = req.query.Friends as Array<string>;
-    updateProfile.editInformation(displayName, pw, permissionLevel, blockedProfiles, friends);
+    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends);
 
     const msg = "The information had been edited";
     res.send(msg);

@@ -13,13 +13,14 @@ import { CharSheet } from "./CharSheet";
 import {Spell} from "./Spell";
 //const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reaso
 
+
+
 export class Profile {
 
     //Need to have a token so that the profiles can be more secure
     private displayName;
     private username;
     private password;
-    //private permissionLvl;
     private privacyLvl;
     private email;
     private blockedProfiles = new Array();
@@ -27,7 +28,7 @@ export class Profile {
     private charSheets : Array<CharSheet> = null as any;
     private db : MongoDB;
  
-    public constructor(displayName : string, email : string, privacyLvl : number, username : string, password : string, db : MongoDB);  //Constructor for signing up
+    public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
 
     constructor(...arr: any[] ) {
@@ -35,10 +36,10 @@ export class Profile {
         if(arr.length == 4){
             this.displayName = arr[0];
             this.email = arr[1];
-            this.privacyLvl = arr[2];
-            this.username = arr[3];
-            this.password = arr[4];
-            this.db = arr[5];
+            this.username = arr[2];
+            this.password = arr[3];
+            this.db = arr[4];
+            this.privacyLvl = "Public";
             this.saveToDB();
         }
         else{
@@ -77,7 +78,7 @@ export class Profile {
 
 
 
-    public editInformation(displayName : string, email : string, password : string, privacyLvl : number, blockedProfiles : Array<string>, friends : Array<string>) {
+    public editInformation(displayName : string, email : string, password : string, privacyLvl : string, blockedProfiles : Array<string>, friends : Array<string>) {
         this.displayName = displayName;
         this.email = email;
         this.password = password;
