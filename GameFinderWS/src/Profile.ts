@@ -112,7 +112,7 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "DisplayName", this.displayName);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Email", this.email);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Password", this.password);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PermissionLevel", this.privacyLvl);
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "PrivacyLevel", this.privacyLvl);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "BlockedProfiles", this.blockedProfiles);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Friends", this.friends);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Location", this.location);
