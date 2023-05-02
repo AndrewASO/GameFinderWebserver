@@ -1,5 +1,5 @@
 /**
- * 
+ * This is the webserver where all of the commands that frontend would need can be accessed.
  * @Author Andrew Skevington-Olivera
  * @Date 19-4-23
  */
@@ -52,10 +52,15 @@ export async function startServer() {
     const privacyLvl = req.query.PrivacyLevel as string;
     const blockedProfiles = req.query.BlockedProfiles as Array<string>;
     const friends = req.query.Friends as Array<string>;
-    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends);
+    const location = req.query.Location as string;
+    const status = req.query.Status as string;
+    const tags = req.query.Tags as Array<string>;
+    const aboutMe = req.query.AboutMe as string;
+    const pfp = req.query.PFP as string;
+    const availableTime = req.query.AvailableTime as string; 
+    updateProfile.editInformation(displayName, pw, privacyLvl, blockedProfiles, friends, location, status, tags, aboutMe, pfp, availableTime);
 
-    const msg = "The information had been edited";
-    res.send(msg);
+    res.send( "The information has been edited");
   } )
 
   /**
@@ -201,15 +206,15 @@ export async function startServer() {
     res.send( "Spell has been updated" );
   } )
 
-  //I need username and charName for a characterSheet to be added and then pulling up the characterSheet and adding a spell to it 
-  //Need to be able to change characterSheet & spell information incase of typos
-  //Need to be able to change profile information
-
   server.listen(80);
-
   
 }
 
+/**
+ * This function converts any Array<string> to an Array<number> because it only takes that for queries 
+ * instead of being able to take Array<number> directly.
+ * @param arrStr 
+ */
 function convertStrToNum(arrStr : Array<string>){
   const numStats = arrStr.map(str => {
     return parseInt(str, 10);

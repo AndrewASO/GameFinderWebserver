@@ -1,14 +1,13 @@
 /**
- * 
+ * This is ProfilesManagement where new profiles can be created and you can login to existing ones. Whenever this is first intialized
+ * it creates profile objects for each of the profile documents in MongoDB. Allows for profile objects to be accessed.
  * @Author Andrew SKevington-Olivera
  * 19-4-23
  */
 
 
 import { MongoDB } from "./mongoDB";
-//import * as DB from "./mongoDB";
 import {Profile} from "./Profile";
-//const {MongoClient} = require('mongodb');   //This is needed to get MongoClient to start working for whatever reason
 
 export class ProfileManagement {
 
@@ -90,16 +89,8 @@ export class ProfileManagement {
     public async accessUser(username : string) {
 
         for(var i = 0; i < this.profileList.length; i++) {
-
-            //console.log( "This is the username being looked at " + username);
-            //console.log( "This is the uesrname of profileList[i] " + this.profileList[i].returnUsername() );
-
             if(username == this.profileList[i].returnUsername() ) {
-                //console.log( "access user is getting to this point")
-                let copyProfile = this.profileList[i];
-                //copyProfile.setMongoDB();
-                //return JSON.stringify(copyProfile);
-                //console.log( copyProfile );
+                let copyProfile = this.profileList[i];  //Can probably just return this.profileList[i] later
                 return copyProfile;
             }
         }
