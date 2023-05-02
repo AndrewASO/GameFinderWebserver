@@ -25,7 +25,9 @@ export async function startServer() {
     const displayName = req.query.DisplayName as string;
     const username = req.query.Username as string;
     const pw = req.query.Password as string;
-    const msg = await profileManagement.signIn( displayName, username, pw);
+    const email = req.query.Email as string;
+    const privacyLvl = Number.parseInt( req.query.PrivacyLevel as string);
+    const msg = await profileManagement.signIn( displayName, email, privacyLvl, username, pw);
     res.send(msg);
   } )
 

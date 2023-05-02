@@ -50,13 +50,13 @@ export class ProfileManagement {
      * @param password 
      * @returns 
      */
-    async signIn(displayName : string, username : string, password : string) {
+    async signIn(displayName : string, email : string, privacyLvl: number, username : string, password : string) {
 
         const collection = this.db.returnCollection("ProfilesDB", "Profiles");
         const doc = await collection.findOne( {Username : username} );
 
         if(doc == null) {    //Username hasn't been chosen yet for the website
-            let newProfile = new Profile(displayName, username, password, this.db);
+            let newProfile = new Profile(displayName, email, privacyLvl, username, password, this.db);
             this.addProfile(newProfile);
             console.log("A new profile should be in the process of being created");
             return true;
