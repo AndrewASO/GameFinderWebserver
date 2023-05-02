@@ -209,7 +209,7 @@ export async function startServer() {
     res.send( "Spell has been updated" );
   } )
 
-  server.listen(3000);
+  server.listen(80);
   
 }
 
