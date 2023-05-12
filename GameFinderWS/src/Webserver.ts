@@ -133,7 +133,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charPos = req.query.CharacterPos as string;
-    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
     
     res.send( JSON.stringify(charSheet) );
   } )
