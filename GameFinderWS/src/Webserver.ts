@@ -125,6 +125,19 @@ export async function startServer() {
     res.send( "Character Sheet should be uploaded to profile" );
   } )
 
+
+  /**
+   * 
+   */
+  server.get('/ReturnCharacterSheetInfo', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charPos = req.query.CharacterPos as string;
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    
+    res.send( JSON.stringify(charSheet) );
+  } )
+
   /**
    * DONE
    */
@@ -176,6 +189,21 @@ export async function startServer() {
     combatStats, money, spells, skills, pictures);
 
     res.send( "Character Sheet should be updated" );
+  } )
+
+  /**
+   * 
+   */
+  server.get('/SetCharacterSheetVar', async (req: Request, res : Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const charPos = req.query.CharacterPos as string;
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.NewVar as any;
+    charSheet[reqVar] = newVar;
+
+    res.send( newVar );
   } )
   
   /**
