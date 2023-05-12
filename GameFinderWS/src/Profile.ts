@@ -19,7 +19,7 @@ export class Profile {
     private username;
     private password;
     private privacyLvl;
-    private email;
+    private email : string = "";
     private location : string = null as any;   
     private status : string = null as any;     
     private tags : Array<string> = null as any;   
@@ -74,14 +74,7 @@ export class Profile {
 
         this.displayName = doc.DisplayName;
         this.privacyLvl = doc.PrivacyLevel;
-        if(doc.CharacterSheets != null) {
-            let test = doc.CharacterSheets;
-            console.log(test);
-            //this.charSheets = JSON.parse( doc.CharacterSheets );
-        }
-        else {
-            this.charSheets = new Array();
-        }
+        this.charSheets = doc.CharacterSheets;
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
@@ -130,7 +123,7 @@ export class Profile {
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "PFP", this.pfp);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "AvailableTime", this.availableTime);
         this.db.updateDB("ProfilesDB", "Profiles", this.username, "Timezone", this.timezone);
-        this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", JSON.stringify(this.charSheets) );
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "CharacterSheets", this.charSheets );
     }
 
 
@@ -155,7 +148,8 @@ export class Profile {
     stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
     pictures : Array<string>){
         charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
-            skills, pictures);
+        skills, pictures);
+        this.updateDB();
     }
 
     public accessCharacterSheet(pos : number) {
