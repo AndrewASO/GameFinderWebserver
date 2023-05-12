@@ -221,7 +221,7 @@ export async function startServer() {
     res.send ( JSON.stringify(recSpells) );
   } )
 
-  server.listen(3000);
+  server.listen(80);
   
 }
 
