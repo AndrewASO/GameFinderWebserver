@@ -74,7 +74,14 @@ export class Profile {
 
         this.displayName = doc.DisplayName;
         this.privacyLvl = doc.PrivacyLevel;
-        this.charSheets = JSON.parse( doc.CharacterSheets );
+        if(doc.CharacterSheets != null) {
+            let test = doc.CharacterSheets;
+            console.log(test);
+            //this.charSheets = JSON.parse( doc.CharacterSheets );
+        }
+        else {
+            this.charSheets = new Array();
+        }
         this.blockedProfiles = doc.BlockedProfiles;
         this.friends = doc.Friends;
         this.email = doc.Email;
