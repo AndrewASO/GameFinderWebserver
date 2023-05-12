@@ -17,8 +17,8 @@ import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunc
 
 export async function startServer() {
   const server = express();
-  //server.use(cors);
-  const allowedOrigins = ['http://34.30.183.36:80'];
+  //server.use(cors); //https://www.twilio.com/blog/add-cors-support-express-typescript-api
+  const allowedOrigins = ['*'];
   const options: cors.CorsOptions = {
     origin: allowedOrigins
   };
