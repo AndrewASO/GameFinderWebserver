@@ -146,11 +146,11 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     let length = 0;
-    if(await profile.charSheets.length == null) {
+    if(profile.charSheets.length == null as any) {
       //Do nothing
     }
     else{
-      length = await profile.charSheets.length;
+      length = profile.charSheets.length;
     }
     console.log( length );
     
