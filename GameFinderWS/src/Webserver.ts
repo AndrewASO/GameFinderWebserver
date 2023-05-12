@@ -18,11 +18,6 @@ import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunc
 export async function startServer() {
   const server = express();
   //server.use(cors); //https://www.twilio.com/blog/add-cors-support-express-typescript-api
-  //const allowedOrigins = ['(http://34.30.183.36:80)'];
-  //const options: cors.CorsOptions = {
-  //  origin: allowedOrigins
-  //};
-  //server.use(cors(options));
   server.use(cors({
     allowedHeaders: "*"
   }))
@@ -80,7 +75,7 @@ export async function startServer() {
   server.get('/ReturnProfileInformation', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    profile.setMongoDB(null as any);
+    profile.setMongoDB(null);
     let JSONConversion = JSON.stringify( profile );
     profile.setMongoDB(db);
     res.send( JSONConversion );
