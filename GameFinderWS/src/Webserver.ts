@@ -156,7 +156,7 @@ export async function startServer() {
       length = await profile.charSheets.length;
     }
     
-    res.send( length );
+    res.send( String(length) );
   } )
 
   /**
