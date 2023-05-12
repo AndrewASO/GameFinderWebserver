@@ -26,7 +26,7 @@ export class Profile {
     private aboutMe : string = null as any;    
     private pfp : string = null as any;   
     private availableTime : string = null as any;  
-    private timezone : string = null as any;
+    private timezone : string = "";
     private blockedProfiles = new Array();
     private friends = new Array();
     //private charSheets : Array<CharSheet> = [];
