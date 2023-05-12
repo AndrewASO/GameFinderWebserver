@@ -221,6 +221,7 @@ export async function startServer() {
     const reqVar = req.query.ReqVar as string;
     const newVar = req.query.NewVar as any;
     charSheet[reqVar] = newVar;
+    profile.updateDB();
 
     res.send( newVar );
   } )
