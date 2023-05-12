@@ -146,7 +146,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     let length = 0;
-    if(profile.charSheets.length == null as any) {
+    if(profile.charSheets == null) {
       //Do nothing
     }
     else{
