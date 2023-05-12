@@ -61,6 +61,7 @@ export class CharSheet {
     }
 
 
+
     //Need to have mongodb be here for a temp amount of time
     /**
      * Create spell function so that it's easier to add spells to the character sheet instead of doing
@@ -77,17 +78,19 @@ export class CharSheet {
      * @param races 
      * @param reqClasses 
      */
+    /** 
     public createSpell(spellName : string, castingTime : string, range : string, duration : string, desc : string, spellLvl : string,
     school : Array<string>, components : Array<string>, races : Array<string>, reqClasses : Array<string>, db : MongoDB) {
         let newSpell = new Spell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses);
         this.addSpell( newSpell );
         this.infoAddSpell( newSpell, db );
-    }
+    }*/
 
     /**
      * Adds the newly created spell from createSpell() to the spell array in this obj.
      * @param newSpell 
      */
+    /** 
     public addSpell( newSpell : Spell) {
         this.spells.push(newSpell); 
     }
@@ -104,12 +107,13 @@ export class CharSheet {
         else {
             return "The spell is null and hasn't been created in this position yet"
         }
-    }
+    }*/
 
     /**
      * 
      * @param spell 
      */
+    /** 
     public infoAddSpell( spell : Spell, db : MongoDB ) {
         let storage = new InfoStorage( db );
         storage.saveSpells( spell );
@@ -124,6 +128,6 @@ export class CharSheet {
                 recSpells.push( allSpells[i] );
             }
         }
-    }
+    }*/
 
 }

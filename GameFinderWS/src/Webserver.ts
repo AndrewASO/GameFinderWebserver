@@ -135,8 +135,8 @@ export async function startServer() {
     const charPos = req.query.CharacterPos as string;
     let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
     console.log( JSON.stringify(charSheet) );
-    //res.send( JSON.stringify(charSheet) );
-    res.json( charSheet );
+    res.status(1).send( JSON.stringify(charSheet) );
+    //res.json( charSheet );
   } )
 
 
