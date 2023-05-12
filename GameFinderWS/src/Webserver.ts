@@ -9,6 +9,7 @@ import { MongoDB } from "./mongoDB";
 import { Profile } from "./Profile";
 
 import express from "express";
+import cors from 'cors';
 import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunction is needed for this but I'll leave it in for now 
 
 
@@ -16,6 +17,12 @@ import {Request, Response, NextFunction } from 'express'; //Not sure if NextFunc
 
 export async function startServer() {
   const server = express();
+  //server.use(cors);
+  const allowedOrigins = ['http://34.30.183.36:80'];
+  const options: cors.CorsOptions = {
+    origin: allowedOrigins
+  };
+  server.use(cors(options));
   const db = new MongoDB("mongodb+srv://gameFinder:ASUq%23%2AAIwq%29@gamefinder.2rj5gki.mongodb.net/?retryWrites=true&w=majority");
   const profileManagement = new ProfileManagement(db);
 
