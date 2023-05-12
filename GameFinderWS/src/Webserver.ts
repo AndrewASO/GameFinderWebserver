@@ -108,27 +108,19 @@ export async function startServer() {
 
 
   /**
-   * DONE
+   * TO REVISE
    */
   server.get('/AddCharacterSheet', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const charName = req.query.CharacterName as string;
     const race = req.query.Race as string;
-    const background   = req.query.Background as string;
-    const backstory = req.query.Backstory as string;
-    const lvl = req.query.Lvl as string;
     const charClass = req.query.CharacterClass as string;
-    const equipment = req.query.Equipment as string;
-    const stats = convertStrToNum( req.query.Stats as string ); //Change to Array<number>
-    const statMods =  convertStrToNum( req.query.StatModifiers as string );  //Change to Array<number>
-    const combatStats =  convertStrToNum( req.query.CombatStats as string ); //Change to Array<number>
-    const money =  convertStrToNum( req.query.Money as string ); //Change to Array<number>
-    //const spells = null as any; //This is to add spells later
-    const skills = req.query.Skills as Array<string>;
-    const pictures = req.query.Pictures as Array<string>;
-    profile.createCharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods,
-    combatStats, money, skills, pictures);
+    const charSubClass = req.query.CharacterSubClass as string;
+    const lvl = req.query.Level as string;
+    const allignment = req.query.Allignment as string;
+    
+    profile.createCharSheet(charName, race, charClass, charSubClass, lvl, allignment);
 
     res.send( "Character Sheet should be uploaded to profile" );
   } )

@@ -29,7 +29,6 @@ export class Profile {
     private timezone : string = "";
     private blockedProfiles = new Array();
     private friends = new Array();
-    //private charSheets : Array<CharSheet> = [];
     private charSheets = new Array();
     private db : MongoDB;
  
@@ -130,12 +129,9 @@ export class Profile {
 
     //For profiles would I have it be something like calling the profile, then looking at the different character sheets
     //and going from that or should I just call the character sheets and have spells modified from that ?
-    public createCharSheet(charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>){
+    public createCharSheet(charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string){
 
-        let newSheet = new CharSheet(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
-        skills, pictures);
+        let newSheet = new CharSheet(charName, race, charClass, charSubClass, lvl, allignment);
         this.addCharacterSheet(newSheet);
         this.updateDB();
     }
@@ -144,11 +140,8 @@ export class Profile {
         this.charSheets.push(newSheet);
     }
 
-    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, background : string, backstory : string, lvl : string, charClass : string, equipment : string,
-    stats : Array<number>, statMods : Array<number>, combatStats : Array<number>, money : Array<number>, skills : Array<string>,
-    pictures : Array<string>){
-        charSheet.editInformation(charName, race, background, backstory, lvl, charClass, equipment, stats, statMods, combatStats, money,
-        skills, pictures);
+    public updateCharSheet(charSheet : CharSheet, charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string){
+        charSheet.editInformation(charName, race, charClass, charSubClass, lvl, allignment);
         this.updateDB();
     }
 
