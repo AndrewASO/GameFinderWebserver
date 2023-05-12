@@ -134,7 +134,7 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     const charPos = req.query.CharacterPos as string;
     let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
-    
+    console.log( JSON.stringify(charSheet) );
     res.send( JSON.stringify(charSheet) );
     //res.status(500).send( JSON.stringify(charSheet) );
   } )
