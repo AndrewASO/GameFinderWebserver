@@ -70,7 +70,7 @@ export async function startServer() {
   server.get('/ReturnProfileInformation', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    profile.setMongoDB(null);
+    profile.setMongoDB(null as any);
     let JSONConversion = JSON.stringify( profile );
     profile.setMongoDB(db);
     res.send( JSONConversion );
@@ -221,7 +221,7 @@ export async function startServer() {
     res.send ( JSON.stringify(recSpells) );
   } )
 
-  server.listen(80);
+  server.listen(3000);
   
 }
 
