@@ -138,6 +138,18 @@ export async function startServer() {
     res.send( JSON.stringify(charSheet) );
   } )
 
+
+  /**
+   * 
+   */
+  server.get('/ReturnCharacterSheetLength', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const length = profile.CharSheet.length;
+    
+    res.send( length );
+  } )
+
   /**
    * DONE
    */
