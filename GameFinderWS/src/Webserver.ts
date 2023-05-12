@@ -150,7 +150,7 @@ export async function startServer() {
       //Do nothing
     }
     else{
-      length = await profile.charSheets.length - 1;
+      length = await profile.charSheets.length;
     }
     console.log( length );
     
