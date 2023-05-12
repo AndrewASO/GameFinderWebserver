@@ -134,6 +134,7 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     const charPos = req.query.CharacterPos as string;
     let charSheet = await profile.accessCharacterSheet( Number.parseInt(charPos) );
+    console.log("Just checking if this is doing anything");
     console.log( JSON.stringify(charSheet) );
     //res.status(1).send( JSON.stringify(charSheet) );
     res.send( JSON.stringify(charSheet) );
@@ -147,6 +148,7 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     let length = 0;
+    console.log("Just checking if this is doing anything");
     if(await profile.charSheets.length == null) {
       //Do nothing
     }
