@@ -82,6 +82,48 @@ export async function startServer() {
   } )
 
 
+  server.get('/AddFriendOrBlock', async (req: Request, res: Response) => {
+
+    const username = req.query.Username as string;
+    const otherUser = req.query.OtherUser as string;
+    const option = req.query.Option as string;
+    let profile = await profileManagement.accessUser(username);
+
+    if(option == "friend") {
+      profile.addFriend(otherUser);
+      res.send( "The user was friended" );
+    }
+    else if(option == "block") {
+      profile.addBlocked(otherUser);
+      res.send( "The user was blocked" );
+    }
+    else {
+      res.send( "The user was friended or blocked" );
+    }
+  
+  } )
+
+  server.get('/RemoveFriendOrBlock', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    const otherUser = req.query.OtherUser as string;
+    const option = req.query.Option as string;
+    let profile = await profileManagement.accessUser(username);
+
+    if(option == "friend") {
+      profile.removeFriend(otherUser);
+      res.send( "The user was removed from friends" );
+    }
+    else if(option == "block") {
+      profile.removelocked(otherUser);
+      res.send( "The user was blocked" );
+    }
+    else {
+      res.send( "The user was remvoed from blocked" );
+    }
+    res.send( "The user was friended or blocked" );
+  } )
+
+
   /**
    * DONE
    */
@@ -167,17 +209,8 @@ export async function startServer() {
     let charSheet = profile.accessCharacterSheet(charName);
 
     const spellName = req.query.SpellName as string;
-    const castingTime = req.query.CastingTime as string;
-    const range = req.query.Range as string;
-    const duration = req.query.Duration as string;
-    const desc = req.query.Description as string;
-    const spellLvl = req.query.SpellLvl as string;
-    const school = req.query.School as Array<string>;
-    const components = req.query.Components as Array<string>;
-    const races  = req.query.Races as Array<string>;
-    const reqClasses = req.query.ReqClasses as Array<String>;
 
-    charSheet.createSpell(spellName, castingTime, range, duration, desc, spellLvl, school, components, races, reqClasses, db);
+    charSheet.createSpell(spellName, db);
 
     res.send( "Spell has been added to character sheet" );
   } )
@@ -254,7 +287,7 @@ export async function startServer() {
   } )
 
   /**
-   * TO-DO
+   * TO-DO : BUG FIX
    */
   server.get('/RecommendSpells', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -265,6 +298,45 @@ export async function startServer() {
     
     res.send ( JSON.stringify(recSpells) );
   } )
+
+
+  /**
+   * 
+   * GMSCREEN / NPC WEBSERVER
+   * 
+   */
+
+  server.get('/CreateNPC', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const npcName = req.query.NPCName as string;
+
+    //NPC Name
+    
+    res.send ( "something" );
+  } )
+
+  server.get('/EditNPC', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const npcPos = req.query.NPCPos as string;
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.Newvar as string;
+
+    res.send ( "something" );
+  } )
+
+  server.get('/ReturnNPCs', async (req: Request, res: Response) => {
+    const username = req.query.Username as string;
+    let profile = await profileManagement.accessUser(username);
+    const npcPos = req.query.NPCPos as string;
+    //Number.parseInt(npcPos)
+
+    res.send ( "something" );
+  } )
+
+
+
 
   server.listen(80);
   

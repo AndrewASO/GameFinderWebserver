@@ -129,9 +129,9 @@ export class Profile {
 
     //For profiles would I have it be something like calling the profile, then looking at the different character sheets
     //and going from that or should I just call the character sheets and have spells modified from that ?
-    public createCharSheet(charName : string, race : string, charClass : string, charSubClass : string, lvl : string, allignment : string){
+    public createCharSheet(charName : string){
 
-        let newSheet = new CharSheet(charName, race, charClass, charSubClass, lvl, allignment);
+        let newSheet = new CharSheet(charName);
         this.addCharacterSheet(newSheet);
         this.updateDB();
     }
@@ -151,6 +151,30 @@ export class Profile {
         }
         else {
             return "The character sheet at this position is null";
+        }
+    }
+
+    public addFriend(friend : string) {
+        this.friends.push(friend);
+    }
+
+    public removeFriend(friend : string) {
+        //Got code from this https://stackoverflow.com/questions/15292278/how-do-i-remove-an-array-item-in-typescript
+        const index = this.friends.indexOf(friend, 0);
+        if (index > -1) {
+            this.friends.splice(index, 1);
+        }
+
+    }
+
+    public addBlocked(block : string) {
+        this.blockedProfiles.push(block);
+    }
+
+    public removeBlocked(block : string) {
+        const index = this.blockedProfiles.indexOf(block, 0);
+        if (index > -1) {
+            this.blockedProfiles.splice(index, 1);
         }
     }
 
