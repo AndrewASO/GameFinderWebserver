@@ -15,7 +15,6 @@ export class ProfileManagement {
 
     private profileList = new Array();
     private db : MongoDB;
-    private dmSCreen! : DMScreen;
 
     /**
      * 
@@ -32,7 +31,6 @@ export class ProfileManagement {
      */
     async initialize() {
 
-        this.dmSCreen = new DMScreen(this.db);
         const collection = this.db.returnCollection("ProfilesDB", "Profiles");
 
         var usernameList = new Array();

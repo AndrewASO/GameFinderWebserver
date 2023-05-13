@@ -11,6 +11,7 @@
 import { MongoDB } from "./mongoDB";
 import { CharSheet } from "./CharSheet";
 import { Spell } from "./Spell";
+import { DMScreen } from "./DMScreen";
 
 export class Profile {
 
@@ -31,6 +32,7 @@ export class Profile {
     private friends = new Array();
     private charSheets = new Array();
     private db : MongoDB;
+    private DMSCreen! : DMScreen;
  
     public constructor(displayName : string, email : string, username : string, password : string, db : MongoDB);  //Constructor for signing up
     public constructor(username : string, password : string, db : MongoDB);    //Constructor for logging in
@@ -44,12 +46,14 @@ export class Profile {
             this.password = arr[3];
             this.db = arr[4];
             this.privacyLvl = "Public";
+            this.DMSCreen = new DMScreen( arr[2], arr[4] );
             this.saveToDB();
         }
         else{
             this.username = arr[0];
             this.password = arr[1];
             this.db = arr[2];
+            this.DMSCreen = new DMScreen( arr[0], arr[2] );
             this.getUserDBInfo();
         }
     }

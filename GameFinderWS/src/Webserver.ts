@@ -310,10 +310,9 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
     const npcName = req.query.NPCName as string;
-
-    //NPC Name
+    profile.dmScreen.addNPC(npcName);
     
-    res.send ( "something" );
+    res.send ( "The NPC was created" );
   } )
 
   server.get('/EditNPC', async (req: Request, res: Response) => {
@@ -322,17 +321,19 @@ export async function startServer() {
     const npcPos = req.query.NPCPos as string;
     const reqVar = req.query.ReqVar as string;
     const newVar = req.query.Newvar as string;
+    let npc = profile.dmScreen.accessNPC( Number.parseInt(npcPos) );
+    npc[reqVar] = newVar;
+    profile.dmScreen.saveNPC();
 
-    res.send ( "something" );
+    res.send ( "NPC was modified" );
   } )
 
   server.get('/ReturnNPCs', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    const npcPos = req.query.NPCPos as string;
-    //Number.parseInt(npcPos)
+    let npcList = profile.dmScreen.npcList;
 
-    res.send ( "something" );
+    res.send ( JSON.stringify(npcList) );
   } )
 
 

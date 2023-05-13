@@ -10,24 +10,27 @@ import { NPC } from "./npc"
 
 export class DMScreen {
     
+    public username! : string;
     public NPCList : Array<NPC> = new Array();
     public db! : MongoDB;
 
 
-    constructor(db : MongoDB) {
+    constructor(username : string, db : MongoDB) {
+        this.username = username;
         this.db = db;
     }
 
-    public addNPC() {
-
+    public addNPC(npcName : string) {
+        this.NPCList.push( new NPC(npcName) );
+        this.saveNPC();
     }
 
-    public removeNPC() {
+    public removeNPC(npcPos : number) {
+        if (npcPos > -1) {
+            this.NPCList.splice(npcPos, 1);
+        }
 
-    }
-
-    public editNPC() {
-
+        this.saveNPC();
     }
 
     public accessNPC(npcPos : number) {
@@ -37,5 +40,9 @@ export class DMScreen {
         else {
             return "The npc is null and hasn't been created in this position yet"
         }
+    }
+
+    public saveNPC() {
+        this.db.updateDB("ProfilesDB", "Profiles", this.username, "GMScreen", this.NPCList);
     }
 }
