@@ -311,6 +311,24 @@ export async function startServer() {
     res.send ( JSON.stringify(recSpells) );
   } )
 
+  /**
+  * TO-DO : BUG FIX
+  */
+  server.get('/SetSpellVar', async (req: Request, res : Response) => {
+    const username = req.query.Username as string;
+    const charPos = req.query.CharacterPos as string;
+    const reqVar = req.query.ReqVar as string;
+    const newVar = req.query.NewVar as any;
+    const spellPos = req.query.SpellPos as string;
+    let profile = await profileManagement.accessUser(username);
+    let charSheet = profile.accessCharacterSheet( Number.parseInt(charPos) );
+    let spell = charSheet.accessSpell( Number.parseInt(spellPos) );
+    spell[reqVar] = newVar;
+    profile.updateDB();
+
+    res.send( newVar );
+  } )
+
 
   /**
    * 
@@ -348,7 +366,7 @@ export async function startServer() {
     res.send ( JSON.stringify(npcList) );
   } )
 
-  
+
   server.listen(80);
   
 }
