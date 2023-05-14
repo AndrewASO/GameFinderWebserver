@@ -348,10 +348,8 @@ export async function startServer() {
     res.send ( JSON.stringify(npcList) );
   } )
 
-
-
-
-  server.listen(3000);
+  
+  server.listen(80);
   
 }
 
