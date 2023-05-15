@@ -76,12 +76,9 @@ export async function startServer() {
   server.get('/ReturnProfileInformation', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username);
-    let dmScreen = await profile.returnDMScreen();
     profile.setMongoDB(null);
-    dmScreen.setMongoDB(null);
     let JSONConversion = JSON.stringify( profile );
     profile.setMongoDB(db);
-    dmScreen.setMongoDB(db);
     res.send( JSONConversion );
   } )
 
@@ -154,8 +151,14 @@ export async function startServer() {
  } )
 
 
+ /**
+  * 
+  * CHARACTER SHEETS WEBSERVER
+  * 
+  */
+
   /**
-   * TO REVISE
+   * DONE
    */
   server.get('/AddCharacterSheet', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
@@ -372,6 +375,7 @@ export async function startServer() {
     let profile = await profileManagement.accessUser(username);
     const npcName = req.query.NPCName as string;
     profile.dmScreen.addNPC(npcName);
+    profile.updateDB();
     
     res.send ( "The NPC was created" );
   } )
@@ -384,7 +388,7 @@ export async function startServer() {
     const newVar = req.query.Newvar as string;
     let npc = profile.dmScreen.accessNPC( Number.parseInt(npcPos) );
     npc[reqVar] = newVar;
-    profile.dmScreen.saveNPC();
+    profile.updateDB();
 
     res.send ( "NPC was modified" );
   } )
@@ -398,7 +402,7 @@ export async function startServer() {
   } )
 
 
-  server.listen(80);
+  server.listen(3000);
   
 }
 
