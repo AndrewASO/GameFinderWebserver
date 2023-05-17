@@ -103,7 +103,7 @@ export class Profile {
                 this.charSheets.push(newCharSheet);
             }
 
-            console.log( this.charSheets );
+            //console.log( this.charSheets );
         }
 
         //console.log( this.charSheets );
