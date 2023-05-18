@@ -127,7 +127,7 @@ export class Profile {
             //console.log( this.charSheets );
         }
 
-        console.log( this.charSheets );
+        //console.log( this.charSheets );
 
         let dummyDMScreen = doc.DMScreen;
         if(dummyDMScreen != null) {
