@@ -500,7 +500,7 @@ export async function startServer() {
   server.get('/ReturnNPCs', async (req: Request, res: Response) => {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
-    let npcList = profile.dmScreen.npcList;
+    let npcList = profile.dmScreen.NPCList;
 
     res.send ( JSON.stringify(npcList) );
   } )
