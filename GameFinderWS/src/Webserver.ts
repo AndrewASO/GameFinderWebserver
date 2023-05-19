@@ -277,12 +277,16 @@ export async function startServer() {
     const username = req.query.Username as string;
     let profile = await profileManagement.accessUser(username); //Maybe I should have a check for if profile is null ?
     let length = 0;
-    if(profile.charSheets == null) {
-      //Do nothing
+
+    if(profile != null ) { 
+      if(profile.charSheets != null) {
+        length = profile.charSheets.length;
+      }
+      else{
+        //Do Nothing
+      }
     }
-    else{
-      length = profile.charSheets.length;
-    }
+    
     console.log( length );
     
     res.send( String(length) );
